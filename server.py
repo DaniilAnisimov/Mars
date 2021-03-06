@@ -129,5 +129,24 @@ def astronaut_selection():
                "<h3 align='center'><a href='/'>Вернуться на главную страницу</a></h3>"
 
 
+@app.route("/choice/<planet_name>")
+def choice(planet_name):
+    return f'''<!doctype html>
+                <html lang="ru">
+                  <head>
+                    <meta charset="utf-8">
+                    <link rel="stylesheet" href="{url_for("static", filename="css/style.css")}">
+                  </head>
+                  <body>
+                    <h1>Моё предложение: {planet_name}</h1>
+                    <h2>Эта планета близка к земле;</h2>
+                    <p class="p4"><br>У неё есть несколько спутников;</p>
+                    <p class="p2"><br>На ней есть полезные ископаемые;</p>
+                    <p class="p3"><br>Там есть высокие горы;</p>
+                    <p class="p1"><br>И наконец она просто красива;</p>
+                  </body>
+                </html>'''
+
+
 if __name__ == '__main__':
     app.run(port=port, host=host)
