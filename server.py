@@ -148,5 +148,23 @@ def choice(planet_name):
                 </html>'''
 
 
+@app.route("/results/<nickname>/<int:level>/<float:rating>")
+def results(nickname, level, rating):
+    return f'''<!doctype html>
+                <html lang="ru">
+                <head>
+                <meta charset="utf-8">
+                <link rel="stylesheet" href="{url_for("static", filename="css/style.css")}">
+                </head>
+                <body>
+                <h1>Результаты отбора</h1>
+                <h2>Претендента на участие в миссии {nickname}:</h2>
+                <p class="p3"><br>Поздравляем! Ваш рейтинг после 3 этапа отбора</p>
+                составляет 68.2!
+                <p class="p5"><br>Желаем удачи</p>
+                </body>
+                </html>'''
+
+
 if __name__ == '__main__':
     app.run(port=port, host=host)
