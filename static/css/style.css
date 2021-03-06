@@ -1,23 +1,30 @@
-h1 {
-   color: #f00
-}
-
 .p1 {
-background: #ccb8b8
+background: #ccb8b8;
 }
 
 .p2 {
-background: #6cd96a
+background: #6cd96a;
 }
 
 .p3 {
-background: #738a72
+background: #738a72;
 }
 
 .p4 {
-background: #fcff4a
+background: #fcff4a;
 }
 
 .p5 {
-background: #ff0331
+background: #ff0331;
 }
+
+form.login_form {
+margin-left: auto;
+margin-right: auto;
+max-width: 450px;
+background-color: #ffcc00;
+border: 1px solid gray;
+border-radius: 5px;
+padding: 10px;
+}
+
