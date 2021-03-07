@@ -1,4 +1,6 @@
 from flask import Flask, url_for, request
+from io import BytesIO
+from PIL import Image
 
 
 app = Flask(__name__)
@@ -159,11 +161,44 @@ def results(nickname, level, rating):
                 <body>
                 <h1>Результаты отбора</h1>
                 <h2>Претендента на участие в миссии {nickname}:</h2>
-                <p class="p3"><br>Поздравляем! Ваш рейтинг после 3 этапа отбора</p>
-                составляет 68.2!
+                <p class="p3"><br>Поздравляем! Ваш рейтинг после {level} этапа отбора</p>
+                составляет {rating}!
                 <p class="p5"><br>Желаем удачи</p>
                 </body>
                 </html>'''
+
+
+photo = ""
+
+
+@app.route("/load_photo", methods=["POST", "GET"])
+def load_photo():
+    global photo
+    if request.method == "GET":
+        return f'''<!doctype html>
+                    <html lang="ru">
+                    <head>
+                        <meta charset="utf-8">
+                        <link rel="stylesheet" href="{url_for("static", filename="css/style.css")}">
+                    </head>
+                    <body>
+                    <h1 align="center">Загрузка фотографии</h1>
+                    <h2 align="center">для участия в миссии</h2>
+                    <div class="form">
+                        <form class="login_form" method="post" enctype="multipart/form-data">
+                            <label for="">Приложите фотографию</label><br>
+                            <input type="file" name="file"><br>
+                            <img src="{photo}"><br>
+                            <button type="submit">Отправить</button>
+                        </form>
+                    </div>
+                    </body>
+                    </html>'''
+    elif request.method == "POST":
+        with open("static/img/load_image.png", "wb") as i:
+            i.write(request.files["file"].read())
+        photo = "static/img/load_image.png"
+        return "<h2 align='center'>Фотография успешно отправлена, <a href='/load_photo'>вернуться назад</a>.</h2>"
 
 
 if __name__ == '__main__':
