@@ -15,7 +15,9 @@ def slash():
                          f'<a href="/promotion">Рекламная кампания</a>',
                          f'<a href="/image_mars">Изображение Марса</a>',
                          f'<a href="/promotion_image">Реклама с картинкой</a>',
-                         f'<a href="/astronaut_selection">Отбор астронавтов</a>'])
+                         f'<a href="/astronaut_selection">Отбор астронавтов</a>',
+                         f'<a href="/load_photo">Загрузка файла</a>',
+                         f'<a href="/carousel">Пейзажи Марса</a>'])
 
 
 @app.route("/slogan")
@@ -199,6 +201,47 @@ def load_photo():
             i.write(request.files["file"].read())
         photo = "static/img/load_image.png"
         return "<h2 align='center'>Фотография успешно отправлена, <a href='/load_photo'>вернуться назад</a>.</h2>"
+
+
+@app.route("/carousel")
+def carousel():
+    return f'''<!DOCTYPE html>
+                <html lang="ru">
+                <head>
+                  <meta charset="utf-8">
+                  <link rel="stylesheet" href="{url_for("static", filename="css/style.css")}">
+                  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+                  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+                </head>
+                <body>
+                <div id="demo" class="carousel slide" data-ride="carousel">
+                  <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                  </ul>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="{url_for('static', filename='img/s1.jpg')}" alt="Los Angeles" width="1100" height="500">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="{url_for('static', filename='img/s2.jpg')}" alt="Chicago" width="1100" height="500">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="{url_for('static', filename='img/s3.jpg')}" alt="New York" width="1100" height="500">
+                    </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                  </a>
+                  <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                  </a>
+                </div>
+                </body>
+                </html>'''
 
 
 if __name__ == '__main__':
